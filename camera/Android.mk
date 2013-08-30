@@ -18,7 +18,12 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
-LOCAL_CFLAGS += -fno-short-enums -DQEMU_HARDWARE -fno-strict-aliasing
+LOCAL_CFLAGS += -fno-short-enums -DQEMU_HARDWARE
+
+ifneq ($(DEBUG_FORCE_STRICT_ALIASING),yes)
+LOCAL_CFLAGS += -fno-strict-aliasing
+endif
+
 LOCAL_SHARED_LIBRARIES:= \
     libbinder \
     liblog \
